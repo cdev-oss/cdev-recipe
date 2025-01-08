@@ -18,8 +18,8 @@ tasks:
     dest: ./server.cfg
 
   - action: move_path
-    src: ./tmp/cdev/cdev.png
-    dest: ./cdev.png
+    src: ./tmp/cdev/cdev.webp
+    dest: ./cdev.webp
 
   # Prepare Database
   - action: connect_database
