@@ -9,22 +9,22 @@ description: CDev's custom QBCore to test out new features
 tasks:
   #  Download Base Files
   - action: download_github
-    src: https://github.com/qbcore-framework/txAdminRecipe
+    src: https://github.com/cdev-oss/cdev-recipe
     ref: main
-    dest: ./tmp/qbcore
+    dest: ./tmp/cdev
 
   - action: move_path
-    src: ./tmp/qbcore/server.cfg
+    src: ./tmp/cdev/server.cfg
     dest: ./server.cfg
 
   - action: move_path
-    src: ./tmp/qbcore/myLogo.png
-    dest: ./myLogo.png
+    src: ./tmp/cdev/cdev.png
+    dest: ./cdev.png
 
   # Prepare Database
   - action: connect_database
   - action: query_database
-    file: ./tmp/qbcore/qbcore.sql
+    file: ./tmp/cdev/cdev.sql
 
   # STANDALONE
   - action: download_github
