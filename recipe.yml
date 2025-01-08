@@ -1,0 +1,150 @@
+$engine: 3
+$onesync: on
+
+name: CDev
+version: 2.2.4
+author: CDev
+description: CDev's custom QBCore to test out new features
+
+tasks:
+  #  Download Base Files
+  - action: download_github
+    src: https://github.com/qbcore-framework/txAdminRecipe
+    ref: main
+    dest: ./tmp/qbcore
+
+  - action: move_path
+    src: ./tmp/qbcore/server.cfg
+    dest: ./server.cfg
+
+  - action: move_path
+    src: ./tmp/qbcore/myLogo.png
+    dest: ./myLogo.png
+
+  # Prepare Database
+  - action: connect_database
+  - action: query_database
+    file: ./tmp/qbcore/qbcore.sql
+
+  # STANDALONE
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    subpath: resources
+    dest: ./resources/[cfx-default]
+
+  - action: remove_path
+    path: ./resources/[cfx-default]/[gameplay]/chat
+
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/overextended/oxmysql/releases/download/v2.11.2/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+
+  - action: download_file
+    path: ./tmp/menuv.zip
+    url: https://github.com/ThymonA/menuv/releases/download/v1.4.1/menuv_v1.4.1.zip
+  - action: unzip
+    dest: ./resources/[standalone]/menuv
+    src: ./tmp/menuv.zip
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  - action: download_github
+    dest: ./resources/[standalone]/bob74_ipl
+    ref: master
+    src: https://github.com/qbcore-framework/bob74_ipl
+
+  - action: download_github
+    dest: ./resources/[standalone]/screenshot-basic
+    ref: master
+    src: https://github.com/citizenfx/screenshot-basic
+
+  - action: download_github
+    dest: ./resources/[standalone]/progressbar
+    ref: main
+    src: https://github.com/qbcore-framework/progressbar
+
+  - action: download_github
+    dest: ./resources/[standalone]/interact-sound
+    ref: master
+    src: https://github.com/qbcore-framework/interact-sound
+
+  - action: download_github
+    dest: ./resources/[standalone]/connectqueue
+    ref: master
+    src: https://github.com/qbcore-framework/connectqueue
+
+  - action: download_github
+    dest: ./resources/[standalone]/PolyZone
+    ref: master
+    src: https://github.com/qbcore-framework/PolyZone
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # Downloading QBCore resources
+  - action: download_github
+    dest: ./resources/[qb]/qb-core
+    ref: main
+    src: https://github.com/qbcore-framework/qb-core
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-adminmenu
+    ref: main
+    src: https://github.com/qbcore-framework/qb-adminmenu
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-hud
+    ref: main
+    src: https://github.com/qbcore-framework/qb-hud
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-inventory
+    ref: main
+    src: https://github.com/qbcore-framework/qb-inventory
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-weathersync
+    ref: main
+    src: https://github.com/qbcore-framework/qb-weathersync
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-spawn
+    ref: main
+    src: https://github.com/qbcore-framework/qb-spawn
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-smallresources
+    ref: main
+    src: https://github.com/qbcore-framework/qb-smallresources
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-menu
+    ref: main
+    src: https://github.com/qbcore-framework/qb-menu
+
+  - action: download_github
+    dest: ./resources/[qb]/qb-input
+    ref: main
+    src: https://github.com/qbcore-framework/qb-input
+
+  - action: download_file
+    path: ./tmp/files/vmenu.zip
+    url: https://github.com/TomGrobbe/vMenu/releases/download/v3.6.5/vMenu-v3.6.5.zip
+
+  - action: unzip
+    dest: ./resources/[cdev]/vMenu
+    src: ./tmp/files/vmenu.zip
+
+  # Clean up
+  - action: remove_path
+    path: ./tmp
